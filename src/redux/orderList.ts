@@ -27,7 +27,7 @@ export const actions = {
 }
 export const fetchOrdersList = (phoneNumber: number | null, typeOfWork: string | null, paid: boolean): ThunkType => (dispatch) => {
     return axios
-        .get(`/orderList?${phoneNumber === null ? "" : `phoneNumber_like=${phoneNumber}`}${typeOfWork === null ? "" : `&typeOfWork=${typeOfWork}`}${paid === false ? "" : `&paid=${paid}`}`)
+        .get(`/orderList?${phoneNumber === null ? "" : `q=${phoneNumber}`}${typeOfWork === null ? "" : `&typeOfWork=${typeOfWork}`}${paid === false ? "" : `&paid=${paid}`}`)
         .then(({data}: any) => {
             dispatch(actions.phoneNumberFilter(data));
         });
