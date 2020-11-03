@@ -27,11 +27,11 @@ export const Filter = () => {
     }
 
     const phoneNumberValue = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.value.length === 11) {
-            const number = Number(e.target.value)
-            dispatch(actions.setPhoneNumber(number))
-        } else if (e.target.value.length === 0) {
+        if (e.target.value.length === 0) {
             const number = null
+            dispatch(actions.setPhoneNumber(number))
+        } else {
+            const number = Number(e.target.value)
             dispatch(actions.setPhoneNumber(number))
         }
         setPhoneValue(e.target.value)
