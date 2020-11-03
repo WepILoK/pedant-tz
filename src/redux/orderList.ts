@@ -20,7 +20,7 @@ export const orderList = (state = initialState, action: ActionsType): InitialSta
 }
 
 export const actions = {
-    phoneNumberFilter: (items: any) => ({
+    setOrderList: (items: any) => ({
         type: "SET_ORDER_LIST", payload: items
     } as const),
 
@@ -29,7 +29,7 @@ export const fetchOrdersList = (phoneNumber: number | null, typeOfWork: string |
     return axios
         .get(`/orderList?${phoneNumber === null ? "" : `q=${phoneNumber}`}${typeOfWork === null ? "" : `&typeOfWork=${typeOfWork}`}${paid === false ? "" : `&paid=${paid}`}`)
         .then(({data}: any) => {
-            dispatch(actions.phoneNumberFilter(data));
+            dispatch(actions.setOrderList(data));
         });
 }
 
