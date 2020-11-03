@@ -1,4 +1,4 @@
-import {Action, applyMiddleware, combineReducers, createStore} from "redux";
+import {Action, applyMiddleware, combineReducers, compose, createStore} from "redux";
 import thunk, {ThunkAction} from "redux-thunk";
 
 import { orderList } from "./orderList";
