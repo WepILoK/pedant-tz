@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Layout, Table} from "antd";
 
 import {Filter} from "./Filter";
-import {getOrderList} from "../../redux/selector";
+import {getFilters, getOrderList} from "../../redux/selector";
 import {fetchOrdersList} from "../../redux/orderList";
 
 const {Content} = Layout;
@@ -34,10 +34,11 @@ const columns = [
 export const ContentComp = () => {
     const dataSource = useSelector(getOrderList)
     const dispatch = useDispatch();
+    const {phoneNumber, typeOfWork, paid} = useSelector(getFilters)
 
     React.useEffect(() => {
-        dispatch(fetchOrdersList(null, null, false))
-    }, []);
+        dispatch(fetchOrdersList(phoneNumber, typeOfWork, paid))
+    }, [phoneNumber, typeOfWork, paid]);
 
     return (
         <Content style={{margin: '0 16px'}}>

@@ -15,12 +15,11 @@ export const Filter = () => {
     const dispatch = useDispatch()
 
     function handleChange(value: string) {
-        if (value === undefined) {
+        if (value === undefined || value === "null") {
             dispatch(actions.setTypeOfWork(null))
         } else {
             dispatch(actions.setTypeOfWork(value))
         }
-        console.log(`selected ${value}`);
     }
 
     function onChange(e: any) {
@@ -49,7 +48,8 @@ export const Filter = () => {
                        style={{width: "150px", borderRadius: "20px"}}/>
             </Col>
             <Col span={6}>
-                <Select allowClear defaultValue="Стрижка" style={{width: 120,}} onChange={handleChange}>
+                <Select allowClear defaultValue="null" style={{width: 120,}} onChange={handleChange}>
+                    <Option value="null"></Option>
                     <Option value="Стрижка">Стрижка</Option>
                     <Option value="Маникюр">Маникюр</Option>
                     <Option value="Педикюр">Педикюр</Option>
