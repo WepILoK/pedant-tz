@@ -11,6 +11,6 @@ export const setPhoneNumber = createEvent<number | null>()
 export const setPriseOfWork = createEvent<boolean>()
 
 filter.on(setTypeOfWork, (state, string) => ({...state, typeOfWork: string}))
-filter.on(setPhoneNumber, (state, string) => ({...state, phoneNumber: string}))
-filter.on(setPriseOfWork, (state, string) => ({...state, paid: string}))
+filter.on(setPhoneNumber, (state, number) => ({...state, phoneNumber: number}))
+filter.on(setPriseOfWork, (state, boolean) => ({...state, paid: boolean}))
 
