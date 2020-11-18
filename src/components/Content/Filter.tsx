@@ -1,44 +1,42 @@
 import React, {ChangeEvent, useState} from "react";
 import {Button, Checkbox, Col, Input, Row, Select} from "antd";
-import {useDispatch, useSelector} from "react-redux";
+import { useStore } from "effector-react";
 
-import {actions} from "../../redux/filter";
-import {getFilters} from "../../redux/selector";
-import {fetchOrdersList} from "../../redux/orderList";
+import {filter, setTypeOfWork, setPriseOfWork, setPhoneNumber} from "../../effector/filter";
+import {fetchOrdersList} from "../../effector/orderList";
 
 
 const {Option} = Select;
 
 export const Filter = () => {
     const [phoneValue, setPhoneValue] = useState("")
-    const {phoneNumber, typeOfWork, paid} = useSelector(getFilters)
-    const dispatch = useDispatch()
+    const {phoneNumber, typeOfWork, paid} = useStore(filter)
 
     function handleChange(value: string) {
         if (value === undefined || value === "null") {
-            dispatch(actions.setTypeOfWork(null))
+            setTypeOfWork(null)
         } else {
-            dispatch(actions.setTypeOfWork(value))
+            setTypeOfWork(value)
         }
     }
 
     function onChange(e: any) {
-        dispatch(actions.setPriseOfWork(e.target.checked))
+        setPriseOfWork(e.target.checked)
     }
 
     const phoneNumberValue = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.value.length === 0) {
             const number = null
-            dispatch(actions.setPhoneNumber(number))
+            setPhoneNumber(number)
         } else {
             const number = Number(e.target.value)
-            dispatch(actions.setPhoneNumber(number))
+            setPhoneNumber(number)
         }
         setPhoneValue(e.target.value)
     }
 
     const applyFilters = () => {
-        dispatch(fetchOrdersList(phoneNumber, typeOfWork, paid))
+        fetchOrdersList({phoneNumber, typeOfWork, paid})
     }
 
     return (

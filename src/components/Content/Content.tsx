@@ -1,10 +1,11 @@
 import React from "react";
-import {useDispatch, useSelector} from "react-redux";
 import {Layout, Table} from "antd";
+import { useStore } from "effector-react";
 
 import {Filter} from "./Filter";
-import {getFilters, getOrderList} from "../../redux/selector";
-import {fetchOrdersList} from "../../redux/orderList";
+import {fetchOrdersList, orderList} from "../../effector/orderList";
+import {filter} from "../../effector/filter";
+
 
 const {Content} = Layout;
 
@@ -32,12 +33,12 @@ const columns = [
 ];
 
 export const ContentComp = () => {
-    const dataSource = useSelector(getOrderList)
-    const dispatch = useDispatch();
-    const {phoneNumber, typeOfWork, paid} = useSelector(getFilters)
+    const dataSource = useStore(orderList)
+    const {phoneNumber, typeOfWork, paid} = useStore(filter)
 
     React.useEffect(() => {
-        dispatch(fetchOrdersList(phoneNumber, typeOfWork, paid))
+        fetchOrdersList({phoneNumber, typeOfWork, paid})
+
     }, [phoneNumber, typeOfWork, paid]);
 
     return (
@@ -49,3 +50,4 @@ export const ContentComp = () => {
         </Content>
     )
 }
+
